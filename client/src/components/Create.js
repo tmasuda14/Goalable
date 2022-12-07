@@ -4,6 +4,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'
 
+// Import images for the goal categories.
 import bank_image from '../images/bank.png'
 import baby_image from '../images/baby-boy.png'
 import confetti_image from '../images/confetti.png'
@@ -13,7 +14,7 @@ import paw_image from '../images/paw.png'
 import savings_image from '../images/savings.png'
 import wedding_image from '../images/wedding-rings.png'
 
-
+// This function will create a new goal.
 export default function Create() {
   const [dateValue, setDateValue] = useState(new Date());
   const { user } = useAuthContext()
@@ -22,14 +23,15 @@ export default function Create() {
    goalAmount: 0,
    currentAmount: 0,
    visibility: "",
-   goalDate: {}, // CHANGE
+   goalDate: {}, 
    goalImage: "",
    user_id: ""
  });
 
+ // Allows navigation to other pages.
  const navigate = useNavigate();
  
- // These methods will update the state properties.
+ // Update the state properties.
  function updateForm(value) {
     console.log(value)
     console.log(value.goalImage)
@@ -38,7 +40,7 @@ export default function Create() {
    });
  }
  
- // This function will handle the submission.
+ // Handle the submission. Creates a POST request to the server.
  const onSubmit = async (e) => {
    e.preventDefault();
   if(!user) {
@@ -58,16 +60,13 @@ export default function Create() {
      },
      body: JSON.stringify(newGoal),
    })
-  //  .catch(error => {
-  //    window.alert(response.error);
 
-  //    //return;
-  //  });
   const json = await response.json()
   if(!response.ok){
     window.alert(json.error)
   }
    
+  // Reset the form.
    setForm({ goal: "", goalAmount: 0, currentAmount: 0, visibility: "", goalDate: {}, user_id: "", goalImage: "" });
    if(response.ok) {
     navigate("/home");
@@ -80,10 +79,9 @@ export default function Create() {
    <div>
      <h3>Create New Record</h3>
      <h5>  Target Date:</h5>
-     <Calendar
-                onChange={setDateValue}
-                value={dateValue}
-            />  
+     <Calendar onChange={setDateValue}
+               value={dateValue}
+      />  
      <form onSubmit={onSubmit}>
        <div className="form-group">
          <label htmlFor="goal">Goal</label>
@@ -156,31 +154,7 @@ export default function Create() {
          </div>
          </div>
          <div className="form-group image-group">
-         {/* <label htmlFor="imageselect">Select Image</label>
-         <input
-           type="image"
-           className="form-control"
-           id="imageselect"s
-           value={}
-           onChange={(e) => updateForm({ goalImage: e.target.value })}
-
-
-
-            <input type="radio" name="imagechoice" className="sr-only" id="baby" onClick={(e) => updateForm({ goalImage: "baby_image" })}/>
-  <label for="male">
-    <img src={baby_image}  alt="baby"/>
-  </label>
-
-
-  import bank_image from '../images/bank.png'
-import baby_image from '../images/baby-boy.png'
-import confetti_image from '../images/confetti.png'
-import family_image from '../images/family.png'
-import grad_image from '../images/graduation-cap.png'
-import paw_image from '../images/paw.png'
-import savings_image from '../images/savings.png'
-import wedding_image from '../images/wedding-rings.png'
-         /> */}
+   
          <h4>CREATE GOAL:</h4>
           <div className="form-check-inline">
             <input type="image" 
@@ -191,9 +165,6 @@ import wedding_image from '../images/wedding-rings.png'
                    onClick={(e) => {e.preventDefault();  updateForm({ goalImage: "bank" })}}
             />
           </div>
-
-
-          
           <div className="form-check-inline">
             <input type="image" 
                    alt="Savings" 
@@ -257,7 +228,6 @@ import wedding_image from '../images/wedding-rings.png'
             />
           </div>
        </div>
-     
        <div className="form-group">
          <input
            type="submit"
@@ -266,11 +236,6 @@ import wedding_image from '../images/wedding-rings.png'
          />
        </div>
      </form>
-
-
-
-
-  
 
 
   <br></br><br></br> <br></br><br></br> <br></br><br></br>

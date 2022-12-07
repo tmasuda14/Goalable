@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { useAuthContext } from '../hooks/useAuthContext'
 
+// Allow a user to pledge to a goal.
 export default function Pledge() {
 
   const { user } = useAuthContext()
@@ -13,17 +14,14 @@ export default function Pledge() {
         goalDate: "",
         contributors: []
       });
-
-    const [pledgeAmount, setPledgeAmount] = useState(0)
+  const [pledgeAmount, setPledgeAmount] = useState(0)
      
- const params = useParams();
- const navigate = useNavigate();
+  const params = useParams();
+  const navigate = useNavigate();
  
- useEffect(() => {
- 
-
+  // On page load, fetch the specific goal data from the server.
+  useEffect(() => {
    async function fetchData() {
-    
      const id = params.id.toString();
      const response = await fetch(`http://localhost:4000/${params.id.toString()}`);
  
@@ -49,11 +47,11 @@ export default function Pledge() {
  }, [params.id, navigate]);
  
  // These methods will update the state properties.
- function updateForm(value) {
-   return setForm((prev) => {
-     return { ...prev, ...value };
-   });
- }
+//  function updateForm(value) {
+//    return setForm((prev) => {
+//      return { ...prev, ...value };
+//    });
+//  }
  
  async function onSubmit(e) {
    e.preventDefault();
@@ -65,8 +63,7 @@ export default function Pledge() {
      visibility: form.visibility,
      contributors: user.user.username
    };
-  console.log(editedGoal)
-  //  console.log(user.user.username)
+   console.log(editedGoal)
    setPledgeAmount(0)
    // This will send a patch request to update the data in the database.
    await fetch(`http://localhost:4000/edit/${params.id}`, {
@@ -95,7 +92,6 @@ export default function Pledge() {
            readOnly={true}
            disabled={true}
            value={form.goal}
-           //onChange={(e) => updateForm({ goal: e.target.value })}
          />
        </div>
        <div className="form-group">
@@ -107,7 +103,6 @@ export default function Pledge() {
            readOnly={true}
            disabled={true}
            value={form.goalAmount}
-           //onChange={(e) => updateForm({ goalAmount: e.target.value })}
          />
        </div>
        <div className="form-group">
@@ -119,7 +114,6 @@ export default function Pledge() {
            className="form-control"
            id="currentAmount"
            value={form.currentAmount}
-          
          />
        </div>
        <div className="form-group">
@@ -130,11 +124,8 @@ export default function Pledge() {
            id="pledgeAmount"
            value={null}
            onChange={(e) => setPledgeAmount(Number(e.target.value))}
-
-          // onChange={(e) => updateForm({ currentAmount: Number(e.target.value) + Number(form.currentAmount) })}
          />
        </div>
- 
        <div className="form-group">
          <input
            type="submit"

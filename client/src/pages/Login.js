@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useLogin } from '../hooks/useLogin'
 
+// Display a login page and call the login function
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

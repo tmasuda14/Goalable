@@ -8,11 +8,10 @@ export const useRegister = () => {
     const [isLoading, setIsLoading] = useState(null)
     const { dispatch } = useAuthContext()
 
-
+    // Register the user and save the token to local storage    
     const register = async (email, username, password) => {
         setIsLoading(true)
         setError(null)
-
 
         const response = await fetch('http://localhost:4000/user/register', {
             method: 'POST',
@@ -22,12 +21,10 @@ export const useRegister = () => {
         })
 
         const json = await response.json()
-
         if(!response.ok) {
             setIsLoading(false)
             setError(json.error)
         }
-
         if (response.ok) {
             // Save the user to local storage with JWT
             localStorage.setItem('user', JSON.stringify(json.token))

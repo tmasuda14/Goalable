@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
-// import goal_image from '../images/goal_image.png'
 
+// Default image for goals
 import bank_image from '../images/bank.png'
 import baby_image from '../images/baby-boy.png'
 import confetti_image from '../images/confetti.png'
@@ -11,6 +11,7 @@ import grad_image from '../images/graduation-cap.png'
 import paw_image from '../images/paw.png'
 import savings_image from '../images/savings.png'
 import wedding_image from '../images/wedding-rings.png'
+import goalable_qr from '../images/goalable_QR.png'
 
 let imagelst = {
   "bank": bank_image,
@@ -24,17 +25,19 @@ let imagelst = {
 }
 
  
+// Creates the table row for each goal. The props are passed from the goalList function after fetching them from the database.
+// They are then mapped to the Goal component.
 const Goal = (props) => (
  <tr>
    <td><img alt="A goal" src={imagelst[`${props.goal.goalImage}`]} width="50px" height="50px"/></td>
    <td>{props.goal.goal}</td>
-   <td>{props.goal.goalAmount}</td>
-   <td>{props.goal.currentAmount}</td> 
+   <td className="text-center">{props.goal.goalAmount}</td>
+   <td className="text-center">{props.goal.currentAmount}</td> 
    {props.user && 
-   <td>
-     <Link className="btn btn-link" to={`/${props.goal._id}`}>Pledge</Link> 
+   <td className="text-center">
+     <Link className="btn btn-link link-success custom-link" to={`/${props.goal._id}`}>Pledge</Link> 
    </td>}
-   <td>TEXTQR</td>
+   <td className="text-center"><img alt="QR code" className="qr-image" src={goalable_qr}/></td>
  </tr>
 );
  
@@ -81,30 +84,24 @@ export default function GoalList() {
  
  // This following section will display the table with the goals of individuals.
  return (
-    
    <div>
     <div>
         <h2>Welcome to Goalable</h2>
     </div>
-
       <h3>Browse</h3>
-     
-
-     <table className="table table-striped" style={{ marginTop: 20 }}>
+     <table className="table table-striped table-hover custom-table" style={{ marginTop: 20 }}>
        <thead>
          <tr>
           <th></th>
            <th>Public Goals</th>
-           <th>Goal Amount</th>
-           <th>Current Amount</th>
-           {user && <th>Support a goal!</th>}
-           <th>Share</th>
+           <th className="text-center">Goal Amount</th>
+           <th className="text-center">Current Amount</th>
+           {user && <th className="text-center">Support a goal!</th>}
+           <th className="text-center">Share</th>
          </tr>
        </thead>
        <tbody>{goalList()}</tbody>
      </table>
-      
-
    </div>
  );
 }

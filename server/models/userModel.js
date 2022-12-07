@@ -23,6 +23,9 @@ const userSchema = new Schema({
     }
 })
 
+
+// Static methods are called on the model and used for creating and modifying documents in the database.
+
 // Static register method
 userSchema.statics.register = async function (email, username, password) {
     // Validate
@@ -52,6 +55,8 @@ userSchema.statics.register = async function (email, username, password) {
     return user
 }
 
+
+// Static login method
 userSchema.statics.login = async function(email, password) {
     // Validate
     if (!email || !password) {

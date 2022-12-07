@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRegister } from '../hooks/useRegister'
 
-
+// Display a register page and call the register function.
 const Register = () => {
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')

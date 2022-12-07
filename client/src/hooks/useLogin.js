@@ -2,13 +2,13 @@ import { useState } from 'react'
 
 import { useAuthContext } from './useAuthContext'
 
-
+// Login the user and save the token to local storage
 export const useLogin = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
     const { dispatch } = useAuthContext()
 
-
+    // Checks if the user is logged in
     const login = async (email, password) => {
         setIsLoading(true)
         setError(null)

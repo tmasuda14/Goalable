@@ -2,21 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
  
+// Displays personal goals on a user's home page. Allows for editing and deleting of goals.
 const Record = (props) => (
  <tr>
    <td>{props.record.goal}</td>
-   <td>{props.record.goalAmount}</td>
-   <td>{props.record.currentAmount}</td>
-   <td>{props.record.visibility}</td>
-   <td>
-     <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
-     <button className="btn btn-link"
+   <td  className="text-center">{props.record.goalAmount}</td>
+   <td className="text-center">{props.record.currentAmount}</td>
+   <td className="text-center">{props.record.visibility}</td>
+   <td className="text-center">
+     <Link className="btn btn-link link-secondary custom-link" to={`/edit/${props.record._id}`}>Edit</Link> |
+     <button className="btn btn-link link-danger custom-link"
        onClick={() => {
          props.deleteRecord(props.record._id);
        }}
-     >
-       Delete
-     </button>
+     > Delete </button>
    </td>
  </tr>
 );
@@ -77,17 +76,17 @@ export default function RecordList() {
  return (
    <div>
      <h3>Record List</h3>
-     <table className="table table-striped" style={{ marginTop: 20 }}>
+     <table className="table table-striped table-hover" style={{ marginTop: 20 }}>
        <thead>
          <tr>
            <th>Goal</th>
-           <th>Goal Amount</th>
-           <th>Current Amount</th>
-           <th>Visibility</th>
-           <th>Action</th>
+           <th className="text-center">Goal Amount</th>
+           <th className="text-center">Current Amount</th>
+           <th className="text-center">Visibility</th>
+           <th className="text-center">Action</th>
          </tr>
        </thead>
-       <tbody>{recordList()}</tbody>
+       <tbody >{recordList()}</tbody>
      </table>
    </div>
  );

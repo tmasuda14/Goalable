@@ -6,13 +6,13 @@ const {
     getGoals,
     deleteGoal,
     updateGoal,
-    // pledgeToGoal,
-    // contributeToGoal,
     getSingleUserGoals } = require('../controllers/goalController')
 const requireAuth = require('../middleware/requireAuth')
 const goalRouter = express.Router()
 
-// goalRouter.use(requireAuth)
+
+// Routers will handle requests to a specific endpoint
+
 // GET all goals
 goalRouter.get('/', getGoals)
 
@@ -30,11 +30,5 @@ goalRouter.delete('/:id',  deleteGoal)
 
 // UPDATE a goal
 goalRouter.patch('/edit/:id', updateGoal)
-
-// // POST a PLEDGE to a goal
-// goalRouter.get('/pledge/:id', pledgeToGoal)
-
-// // POST a DIRECT CONTRIBUTION to a goal
-// goalRouter.get('/contribute/:id', contributeToGoal)
 
 module.exports = goalRouter

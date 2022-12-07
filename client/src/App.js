@@ -7,13 +7,10 @@ import Create from './components/Create'
 
 import Browse from './pages/Browse'
 import EditGoal from './components/EditGoal'
-// import Register from './components/Register'
-// import Login from './components/Login'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Pledge from './components/Pledge'
 import Contribute from './components/Contribute'
-// import Calendar from 'react-calendar'
 
 function App() {
   const { user } = useAuthContext()

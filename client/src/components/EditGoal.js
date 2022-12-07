@@ -1,49 +1,44 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 
-
+// Allow a user to edit a goal.
 export default function EditGoal() {
-
-
     const [form, setForm] = useState({
         goal: "",
         goalAmount: 0,
         currentAmount: 0,
         visibility: "",
-        goalDate: new Date() // CHANGE
+        goalDate: new Date()
       });
      
- const params = useParams();
- const navigate = useNavigate();
- 
- useEffect(() => {
- 
-
-   async function fetchData() {
+    const params = useParams();
+    const navigate = useNavigate();
     
-     const id = params.id.toString();
-     const response = await fetch(`http://localhost:4000/${params.id.toString()}`);
+    // On page load, fetch the goal data from the server.
+    useEffect(() => {
+      async function fetchData() {
+        const id = params.id.toString();
+        const response = await fetch(`http://localhost:4000/${params.id.toString()}`);
+  
+        if (!response.ok) {
+          const message = `An error has occurred: ${response.statusText}`;
+          window.alert(message);
+          return;
+        }
+  
+      const goals = await response.json();
+      if (!goals) {
+        window.alert(`Record with id ${id} not found`);
+        navigate("/");
+        return;
+      }
  
-     if (!response.ok) {
-       const message = `An error has occurred: ${response.statusText}`;
-       window.alert(message);
-       return;
-     }
+      setForm(goals);
+      }
  
-     const goals = await response.json();
-     if (!goals) {
-       window.alert(`Record with id ${id} not found`);
-       navigate("/");
-       return;
-     }
- 
-     setForm(goals);
-   }
- 
-   fetchData();
- 
-   return;
- }, [params.id, navigate]);
+      fetchData();
+      return;
+    }, [params.id, navigate]);
  
  // These methods will update the state properties.
  function updateForm(value) {
@@ -106,8 +101,7 @@ export default function EditGoal() {
            disabled={true}
            className="form-control"
            id="currentAmount"
-           value={form.currentAmount}
-          
+           value={form.currentAmount}      
          />
        </div>
        <div className="form-group">
@@ -165,8 +159,7 @@ export default function EditGoal() {
            disabled={true}
            className="form-control"
            id="contributors"
-           value={form.contributors}
-          
+           value={form.contributors}    
          />
          <button>Request Funds</button>
        </div>
