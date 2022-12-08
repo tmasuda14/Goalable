@@ -76,13 +76,13 @@ export default function Create() {
  
  // This following section will display the form that takes the input from the user.
  return (
-   <div>
+   <div className="create-goal-div">
      <h3>Create New Record</h3>
      <h5>  Target Date:</h5>
      <Calendar onChange={setDateValue}
                value={dateValue}
       />  
-     <form onSubmit={onSubmit}>
+     <form onSubmit={onSubmit} className="create-goal-form">
        <div className="form-group">
          <label htmlFor="goal">Goal</label>
          <input

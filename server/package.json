@@ -19,6 +19,7 @@
     "jsonwebtoken": "^8.5.1",
     "lokijs": "^1.5.12",
     "mongoose": "^6.6.5",
-    "validator": "^13.7.0"
+    "validator": "^13.7.0",
+    "nodemon": "^1.19.1"
   }
 }

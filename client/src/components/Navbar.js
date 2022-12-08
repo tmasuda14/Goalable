@@ -63,7 +63,7 @@ export default function Navbar() {
            <li className="nav-item">
             <span></span>
             <NavLink className="nav-link" onClick={handleClick} to="/">
-               Log out ({user.username})
+               Log out ({user.user.username})
              </NavLink>
            </li>
            </div>

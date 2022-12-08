@@ -145,3 +145,10 @@ form.signup, form.login {
   width: 25px;
   height: 25px;
 }
+
+.create-goal-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

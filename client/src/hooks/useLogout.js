@@ -1,7 +1,6 @@
 import { useAuthContext } from './useAuthContext'
 
 // Removes user from local storage and dispatches a LOGOUT action
-
 export const useLogout = () => {
     const { dispatch } = useAuthContext()
     const logout = () => {
