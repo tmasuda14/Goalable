@@ -1,6 +1,5 @@
 # Goalable
 
-### Dependencies: TODO
 
 ### To Run: 
 
